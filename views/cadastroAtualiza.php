@@ -1,8 +1,7 @@
 <?php 
     include("../models/conexao.php");
-    include("blades/header.php");
-?>
-<?php
+    include("./blades/header.php");
+
     $query = mysqli_query($conexao,"SELECT * FROM aluno WHERE codigo = ".$_GET["ida"]);
     while($exibe = mysqli_fetch_array($query)){
 ?>
@@ -13,8 +12,7 @@
             <div class="my-3">
                 <label class="form-label">Nome</label>
                 <input class="form-control" type="text" name="alunoNome" value="<?php echo $exibe[1] ?>">
-            </div>
-            
+            </div>     
             <div class="my-3">
                 <label class="form-label">Cidade</label>
                 <input class="form-control" type="text" name="alunoCidade" value="<?php echo $exibe[2] ?>">
@@ -31,5 +29,7 @@
             <input class="btn btn-success" type="submit" value="Atualizar">
         </form>
     </div>
-<?php } ?>
-<?php include("blades/footer.php"); ?>
+<?php 
+    }
+    include("./blades/footer.php"); 
+?>
