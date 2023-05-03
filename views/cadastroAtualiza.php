@@ -6,7 +6,7 @@
     while($exibe = mysqli_fetch_array($query)){
 ?>
     <div class="container bg-white mt-5 rounded-2 p-4 shadow-lg w-50">
-        <form class="container p-4 border" action="../controllers/atualizarAluno.php" method="post">
+        <form id="form-atualiza" class="container p-4 border" action="../controllers/atualizarAluno.php" method="post">
             <legend class="mb-4">Atualizar Aluno</legend>
             <input class="form-control" type="hidden" name="alunoCodigo" value="<?php echo $exibe[0] ?>">
             <div class="my-3">
@@ -26,7 +26,7 @@
                     <label for="alunoSexoF" class="form-check-label">F</label>
                 </div>
             </div>
-            <input class="btn btn-success" type="submit" value="Atualizar">
+            <input id="atualizar" class="btn btn-success" type="submit" value="Atualizar">
         </form>
     </div>
 <?php 

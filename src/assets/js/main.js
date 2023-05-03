@@ -8,6 +8,28 @@ $('#file').on('change', function(){
     filePreview(this, maxSize);
 });
 
+$('#form-cadastro').on('submit', function(event){
+    event.preventDefault();
+    let form = $(this);
+    let formData = new FormData(form[0]);
+    $.ajax({
+        url: '../controllers/cadastrarAluno.php',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response){
+            showAlert(response, "index.php");
+            form[0].reset();
+        },
+        error: function(xhr, status, error) {
+            showAlert('Ocorreu um erro ao processar a solicitação: ' + error);
+            console.error(xhr.responseText);
+        }
+    });
+});
+
+
 $('#modal-delete').on('show.bs.modal', function (event) {
     let button = $(event.relatedTarget);
     let id = button.data('id');
@@ -55,7 +77,7 @@ filePreview = (input, maxSize) => {
     }
 }
 
-showAlert = (msg, reload = false) => {
+showAlert = (msg, reload = false, href = false) => {
     const alert = document.getElementById('alert');
 
     alert.querySelector("#modal-text").textContent = msg;
@@ -65,5 +87,11 @@ showAlert = (msg, reload = false) => {
         $('#alert').on('hidden.bs.modal', function(){
             window.location.reload();
         });
+    }
+
+    if(href!==false){
+        $('#alert').on('hidden.bs.modal', function(){
+            window.location.href = href;
+        });      
     }
 }

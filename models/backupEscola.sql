@@ -11,6 +11,21 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+USE `escola`;
+CREATE TABLE IF NOT EXISTS `imagesPNG` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dir` varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `aluno_images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `alunoCodigo` int(11) NOT NULL,
+  `imageCodigo` int(11) NOT NULL,
+  CONSTRAINT `alunoCodigo_fk` FOREIGN KEY(`alunoCodigo`) REFERENCES `aluno`(`codigo`),
+  CONSTRAINT `imageCodigo_fk` FOREIGN KEY(`imageCodigo`) REFERENCES `imagesPNG`(`id`),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARSET=latin1;
 
 -- Copiando estrutura do banco de dados para escola
 DROP DATABASE IF EXISTS `escola`;

@@ -51,7 +51,4 @@
     } 
 ?>
 </div>
-<?php 
-    include("./components/modal.php"); 
-    include("./blades/footer.php"); 
-?>
+<?php include("./blades/footer.php"); ?>
