@@ -7,7 +7,7 @@
     if(mysqli_query($conexao, "INSERT INTO aluno(nome, cidade, sexo) VALUES('".$_POST["alunoNome"]."', '".$_POST["alunoCidade"]."', '".$_POST["alunoSexo"]."')")){
         $aluno_id = mysqli_insert_id($conexao);
         foreach($imagens_ids as $imagem_id){
-            mysqli_query($conexao, "INSERT INTO aluno_imagens(alunoCodigo, imageCodigo) VALUES($aluno_id, $imagem_id)");
+            mysqli_query($conexao, "INSERT INTO aluno_imagens(alunoCodigo, imagemCodigo) VALUES($aluno_id, $imagem_id)");
             header("location:../views/");
         }
     }else{

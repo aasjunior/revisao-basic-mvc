@@ -7,7 +7,7 @@
                     if($nome = md5Random($arquivo['name'][$k])){
                         $destino = "../src/uploads/".$nome.".png";
                         if(move_uploaded_file($arquivo['tmp_name'][$k], $destino)){
-                            mysqli_query($conexao, "INSERT INTO imagesPNG(dir) values('$destino')");
+                            mysqli_query($conexao, "INSERT INTO imagens(dir) values('$destino')");
                             $imagens_ids[$k] = mysqli_insert_id($conexao);
                         }else{
                             echo "Erro ao enviar o arquivo!<br>".
@@ -37,6 +37,12 @@
             }
         }else{
             return $nomeRand;
+        }
+    }
+
+    function mkdirUploads(){
+        if(!file_exists("../src/uploads")){
+            mkdir("../src/uploads");
         }
     }
 ?>

@@ -1,43 +1,52 @@
--- --------------------------------------------------------
--- Servidor:                     127.0.0.1
--- Versão do servidor:           10.1.33-MariaDB - mariadb.org binary distribution
--- OS do Servidor:               Win32
--- HeidiSQL Versão:              9.5.0.5196
--- --------------------------------------------------------
+create database escola;
+use escola
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
-
--- Copiando estrutura do banco de dados para escola
-DROP DATABASE IF EXISTS `escola`;
-CREATE DATABASE IF NOT EXISTS `escola` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `escola`;
-
--- Copiando estrutura para tabela escola.aluno
 CREATE TABLE IF NOT EXISTS `aluno` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(250) DEFAULT NULL,
   `cidade` varchar(250) DEFAULT NULL,
   `sexo` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela escola.aluno: ~5 rows (aproximadamente)
-DELETE FROM `aluno`;
-/*!40000 ALTER TABLE `aluno` DISABLE KEYS */;
-INSERT INTO `aluno` (`codigo`, `nome`, `cidade`, `sexo`) VALUES
-	(6, 'Paula', 'Registro', 'f'),
-	(9, 'Fernando', 'Registro', 'm'),
-	(10, 'Fabiano', 'Registro', 'm'),
-	(11, 'Fabio', 'Florianópolis', 'm'),
-	(13, 'Fernando', 'Registro', NULL),
-	(15, 'Fred', 'Registro', 'm');
-/*!40000 ALTER TABLE `aluno` ENABLE KEYS */;
+CREATE TABLE IF NOT EXISTS `imagens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dir` varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARSET=latin1;
 
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+CREATE TABLE IF NOT EXISTS `aluno_imagens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `alunoCodigo` int(11) NOT NULL,
+  `imagemCodigo` int(11) NOT NULL,
+  CONSTRAINT `alunoCodigo_fk` FOREIGN KEY(`alunoCodigo`) REFERENCES `aluno`(`codigo`) ON DELETE CASCADE,
+  CONSTRAINT `imagemCodigo_fk` FOREIGN KEY(`imagemCodigo`) REFERENCES `imagens`(`id`) ON DELETE CASCADE,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARSET=latin1;
+
+select * from imagens
+select * from aluno
+select * from aluno_imagens
+
+DELETE aluno, imagens, aluno_imagens FROM aluno 
+                               RIGHT JOIN aluno_imagens ON aluno.codigo = aluno_imagens.alunoCodigo
+                               RIGHT JOIN imagens ON aluno_imagens.imagemCodigo = imagens.id
+                               WHERE aluno.codigo = 9
+
+SELECT * FROM aluno 
+RIGHT JOIN aluno_imagens ON aluno.codigo = aluno_imagens.alunoCodigo
+RIGHT JOIN imagens ON aluno_imagens.imagemCodigo = imagens.id
+WHERE aluno.codigo = 9
+
+
+SELECT imagens.dir 
+        FROM imagens 
+        INNER JOIN aluno_imagens ON imagens.id = aluno_imagens.imagemCodigo 
+        INNER JOIN aluno ON aluno.codigo = aluno_imagens.alunoCodigo 
+        WHERE aluno.codigo = 4
+        
+	
+
+DELETE FROM imagens WHERE imagens.id > 1
+
+SET SQL_SAFE_UPDATES = 0;
