@@ -7,7 +7,7 @@
                     if($nome = md5Random($arquivo['name'][$k])){
                         $destino = "../src/uploads/".$nome.".png";
                         if(move_uploaded_file($arquivo['tmp_name'][$k], $destino)){
-                            mysqli_query($conexao, "INSERT INTO imagens(dir) values('$destino')");
+                            mysqli_query($conexao, "INSERT INTO imagens(dir, size_img) values('$destino', ".$arquivo['size'][$k].")");
                             $imagens_ids[$k] = mysqli_insert_id($conexao);
                         }else{
                             echo "Erro ao enviar o arquivo!<br>".

@@ -1,8 +1,7 @@
 <?php
     include("../models/conexao.php");
 
-    $imagens_dir = mysqli_query($conexao, "SELECT imagens.dir 
-                                           FROM imagens 
+    $imagens_dir = mysqli_query($conexao, "SELECT * FROM imagens 
                                            INNER JOIN aluno_imagens ON imagens.id = aluno_imagens.imagemCodigo 
                                            INNER JOIN aluno ON aluno.codigo = aluno_imagens.alunoCodigo 
                                            WHERE aluno.codigo = ".$_POST["id"]);
@@ -15,8 +14,9 @@
                                WHERE aluno.codigo = ".$_POST["id"])){
     
         while ($imagem = mysqli_fetch_array($imagens_dir)) {
-            if (file_exists($imagem)) {
-                unlink($imagem);
+            mysqli_query($conexao, "DELETE FROM imagens WHERE imagens.id = ".$imagem['id']);
+            if (file_exists($imagem['dir'])) {
+                unlink($imagem['dir']);
             }
         }
         echo "Arquivo excluído com sucesso";

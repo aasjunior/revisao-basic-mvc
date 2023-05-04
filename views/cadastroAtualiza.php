@@ -26,7 +26,32 @@
                     <label for="alunoSexoF" class="form-check-label">F</label>
                 </div>
             </div>
-            <input class="btn btn-success" type="submit" value="Atualizar">
+            <div class="row my-3">
+                <div class="row">
+                    <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="1000000">
+                    <div class="col-6">
+                        <label class="form-label">Selecione as imagens</label>    
+                        <input type="file" id="file" class="form-control" name="arquivo[]" multiple="multiple" accept="image/png" required>
+                    </div>
+                    <div class="col-6">
+                            <label class="form-label" for="select_tamanho_arquivo">Selecione o tamanho maximo das imagens:</label>
+                            <select id="select_tamanho_arquivo" name="select_tamanho_arquivo" class="form-select form-select-sm w-50 h-50 rounded-2" aria-label=".form-select-sm example">
+                                <option selected value="1000000">1 MB</option>
+                                <option value="5242880">5 MB</option>
+                                <option value="10485760">10 MB</option>
+                                <option value="52428800">50 MB</option>
+                                <option value="104857600">100 MB</option>
+                                <option value="524288000">500 MB</option>
+                                <option value="1073741824">1 GB</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="uploads" class="row"></div>
+                <div class="row justify-content-end mt-3">
+                    <input id="cadastrar" class="btn btn-success" type="submit" value="Cadastrar" style="width:100px">
+                </div>
+            </div>
         </form>
     </div>
 <?php 
