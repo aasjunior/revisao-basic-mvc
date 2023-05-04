@@ -1,3 +1,4 @@
+drop database escola
 create database escola;
 use escola
 
@@ -12,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `aluno` (
 CREATE TABLE IF NOT EXISTS `imagens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dir` varchar(255) NOT NULL UNIQUE,
+  `size_img` bigint unsigned,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB CHARSET=latin1;
 
@@ -29,14 +31,14 @@ select * from aluno
 select * from aluno_imagens
 
 DELETE aluno, imagens, aluno_imagens FROM aluno 
-                               RIGHT JOIN aluno_imagens ON aluno.codigo = aluno_imagens.alunoCodigo
-                               RIGHT JOIN imagens ON aluno_imagens.imagemCodigo = imagens.id
-                               WHERE aluno.codigo = 9
+INNER JOIN aluno_imagens ON aluno.codigo = aluno_imagens.alunoCodigo
+INNER JOIN imagens ON aluno_imagens.imagemCodigo = imagens.id
+WHERE aluno.codigo = 2 AND aluno_imagens.imagemCodigo = imagens.id
 
 SELECT * FROM aluno 
-RIGHT JOIN aluno_imagens ON aluno.codigo = aluno_imagens.alunoCodigo
-RIGHT JOIN imagens ON aluno_imagens.imagemCodigo = imagens.id
-WHERE aluno.codigo = 9
+INNER JOIN aluno_imagens ON aluno.codigo = aluno_imagens.alunoCodigo
+INNER JOIN imagens ON aluno_imagens.imagemCodigo = imagens.id
+WHERE aluno.codigo = 2
 
 
 SELECT imagens.dir 
