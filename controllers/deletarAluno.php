@@ -14,12 +14,17 @@
                                WHERE aluno.codigo = ".$_POST["id"])){
     
         while ($imagem = mysqli_fetch_array($imagens_dir)) {
-            mysqli_query($conexao, "DELETE FROM imagens WHERE imagens.id = ".$imagem['id']);
-            if (file_exists($imagem['dir'])) {
-                unlink($imagem['dir']);
+            if(mysqli_query($conexao, "DELETE FROM imagens WHERE imagens.id = ".$imagem['id'])){
+                if(file_exists($imagem['dir'])){
+                    unlink($imagem['dir']);
+                    echo "Arquivo excluído com sucesso";
+                }else{
+                    echo "Arquivo não encontrado: ".$imagem['dir'];
+                }
+            }else{
+                echo "Erro ao tentar excluir a imagem";
             }
         }
-        echo "Arquivo excluído com sucesso";
     } else{
         echo "Não foi possível excluir o arquivo";
     }

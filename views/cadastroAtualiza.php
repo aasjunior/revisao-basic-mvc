@@ -1,6 +1,9 @@
 <?php 
     include("../models/conexao.php");
     include("./blades/header.php");
+    include("../src/assets/helpers/scripts.php");
+
+    restrito();
 
     $query = mysqli_query($conexao,"SELECT * FROM aluno WHERE codigo = ".$_GET["ida"]);
     while($exibe = mysqli_fetch_array($query)){
@@ -31,7 +34,7 @@
                     <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="1000000">
                     <div class="col-6">
                         <label class="form-label">Selecione as imagens</label>    
-                        <input type="file" id="file" class="form-control" name="arquivo[]" multiple="multiple" accept="image/png" required>
+                        <input type="file" id="file" class="form-control" name="arquivo[]" multiple="multiple" accept="image/png">
                     </div>
                     <div class="col-6">
                             <label class="form-label" for="select_tamanho_arquivo">Selecione o tamanho maximo das imagens:</label>
@@ -47,7 +50,9 @@
                         </div>
                     </div>
                 </div>
-                <div id="uploads" class="row"></div>
+                <div id="uploads" class="row">
+
+                </div>
                 <div class="row justify-content-end mt-3">
                     <input id="cadastrar" class="btn btn-success" type="submit" value="Cadastrar" style="width:100px">
                 </div>

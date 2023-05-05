@@ -32,6 +32,14 @@ $('#deletar').on('click', function(event){
     });
 });
 
+$('#cadastrar').on('click', function(event){
+    input = document.querySelector('#file');
+    if(input.value == ""){
+        event.preventDefault();
+        showAlert('Insira pelo menos uma imagem');
+    }
+});
+
 // Functions
 
 filePreview = (input, maxSize) => {
@@ -50,7 +58,6 @@ filePreview = (input, maxSize) => {
                 msg = "Tamanho de arquivo invalido";
             }
             showAlert(msg);
-            input.value = "";
         }
     }
 }

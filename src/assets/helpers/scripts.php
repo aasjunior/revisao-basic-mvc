@@ -11,12 +11,12 @@
                             $imagens_ids[$k] = mysqli_insert_id($conexao);
                         }else{
                             echo "Erro ao enviar o arquivo!<br>".
-                                "<a href='../views/inicio.php'>Voltar</a>";
+                                "<a href='../views/'>Voltar</a>";
                         }
                     }
             }else{
                 echo "Tamanho ou tipo de arquivo inválido<br><br>".
-                         "<a href='../views/inicio.php'>Voltar</a>";
+                         "<a href='../views/'>Voltar</a>";
             }
         }
 
@@ -43,6 +43,15 @@
     function mkdirUploads(){
         if(!file_exists("../src/uploads")){
             mkdir("../src/uploads");
+        }
+    }
+
+    function restrito(){
+        session_start();
+        if($_SESSION['logado']===1){
+            echo "Bem-vindo, ".$_SESSION['usuario']."! <a href='../controllers/logoff.php'>Sair</a><hr>";
+        }else{
+            header("location:../views/login.php");
         }
     }
 ?>

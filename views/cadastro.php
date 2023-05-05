@@ -1,4 +1,9 @@
-<?php include("./blades/header.php"); ?>
+<?php 
+    include("./blades/header.php"); 
+    include("../src/assets/helpers/scripts.php");
+
+    restrito();
+?>
     <div class="container bg-white w-75 mt-5 rounded-2 p-4 shadow-lg border">
         <form id="form-cadastro" class="container p-5 border" action="../controllers/cadastrarAluno.php" method="post" enctype="multipart/form-data">
             <legend class="mb-4">Cadastrar Aluno</legend>
@@ -24,7 +29,7 @@
                     <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="1000000">
                     <div class="col-6">
                         <label class="form-label">Selecione as imagens</label>    
-                        <input type="file" id="file" class="form-control" name="arquivo[]" multiple="multiple" accept="image/png" required>
+                        <input type="file" id="file" class="form-control" name="arquivo[]" multiple="multiple" accept="image/png">
                     </div>
                     <div class="col-6">
                             <label class="form-label" for="select_tamanho_arquivo">Selecione o tamanho maximo das imagens:</label>

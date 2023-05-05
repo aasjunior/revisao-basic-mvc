@@ -16,5 +16,4 @@
         echo "<br><br>";
         var_dump($imagens_ids);
     }
-    //header("location:../views/");
 ?>

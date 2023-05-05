@@ -1,8 +1,9 @@
-<?php 
+<?php
     include("../models/conexao.php");
     include("./blades/header.php");
     include("../src/assets/helpers/scripts.php");
 
+    restrito();
     mkdirUploads();
 ?>
 <div class="container bg-white w-75 mt-5 rounded-2 p-3 shadow-lg">
