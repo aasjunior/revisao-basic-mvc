@@ -50,5 +50,6 @@ SELECT imagens.dir
 	
 
 DELETE FROM imagens WHERE imagens.id > 1
+DELETE FROM aluno WHERE aluno.codigo > 0
 
 SET SQL_SAFE_UPDATES = 0;
